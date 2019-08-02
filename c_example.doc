@@ -18,3 +18,26 @@ int main()
     }
   return 0;
 }
+
+
+Example 2
+/* Change the iteration number to a pointer to int type*/
+/* Try hardcode a memory addres to the pointer. Even if the address are conflicted, the designated value can still be written into, 
+/* half into the counter addres, half into the hardcoded memory address which found to be quite interesting*/
+
+#include <stido.h>
+
+int ocunter = 0 /global variable
+int main()
+{
+  int *int_p;
+  int_p = &counter; /e.g., int_p is assigned to 0x20000000
+  while(*int_p < 10)
+    {
+      ++(*int_p);
+    }
+   int_p = (int *) 0x20000002U;  /type casting is needed in order to be compiled correctly
+   //int_p = (int *) 0x20000004U;
+   *int_p = 0xDEADBEEF;
+   return 0;
+}
