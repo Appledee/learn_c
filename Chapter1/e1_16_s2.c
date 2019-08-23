@@ -7,22 +7,6 @@
 //*************************************************************************************//
 
 
-/******************************************************************************
-
-Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
-C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
-Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
-//Write a program that reads a set of test strings and prints the longest.
-
-//*************************************************************************************//
-// 1.  Define an upper bound for maximum input line length;
-// 2.  Within the upper bound, capture each input line width;
-// 3.  Store the longest line in a different location and print it out;
-//*************************************************************************************//
-
 
 
 #include<stdio.h>
@@ -37,19 +21,23 @@ void copy (char to[], char from[]);
 
 int max;  /* the recorded max line length*/
 int len;
-char input[MAXLINE]; /* the current input */
-char plot[MAXLINE];  /* plot the recorded max line */
-//int inputMaxLineNumber = 20;
-//char *buffer = (char*) malloc(sizeof(char)*MAXLINE*inputMaxLineNumber);
+int input[MAXLINE]; /* the current input */
+int plot[MAXLINE];  /* plot the recorded max line */
+int inputMaxLineNumber = 20;
+int (*buffer)[20];
+for(int a =0; a< inputMaxLineNumber; a++)
+   {
+     (*buffer)[a] = (char*) malloc(sizeof(char)*MAXLINE);
+   }
 
 int inputLineNumber = 0;
-//int bufferIndex =0;
+int bufferIndex =0;
 
 max = 0;
 while ((len = line(input, MAXLINE)) >= 0)
   {   
     inputLineNumber++;
-    printf("the current input line number is index: %d. The current input linewidth is %d \n",inputLineNumber, len); 
+    printf("the current input line number is:%d , and its length is: %d \n",inputLineNumber, len); 
     
     if(inputLineNumber >=20)
       {
@@ -60,20 +48,20 @@ while ((len = line(input, MAXLINE)) >= 0)
           printf ("the input line length exceeds the MAXLINE length, and its length is %d \n", len);
           printf ("the first MAXLINE length characters are %s \n", input);
        }
-    //need design a buffer to store all of the input;
+    // design a buffer to store all of the input;
 
-   // *(buffer + inputLineNumber * MAXLINE) = input;
+    (*buffer)[inputLineNumber] = input;
     
     if (len > max )
               {
                  max = len;
-                 //bufferIndex = inputLineNumber;
-                 copy(plot, input );
+                 bufferIndex = inputLineNumber;
+                 copy(plot, (*buffer)[bufferIndex] );
                  if (max > 0) /* there was a line */
-                     printf ("a longer line founded which is %s \n", plot);
+                     printf ("the max length line is ploted here: %s \n", plot);
               }
 
-    printf("The current max linewidth = %d which has been plotted here again %s \n", max,  plot);
+    printf("The current maxium widht input line has already been plotted above \n");
 
    }
 return 0;
