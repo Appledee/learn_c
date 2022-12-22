@@ -1,2 +1,3 @@
-# learn_c
-learn c in a hard way
+# A collection of C code from: 
+1. Code exercises from the book <<The C Programming Language>> by Brian Kernighan and Dennis Ritchie. 
+2. Code snippet from websites. 
